@@ -5,9 +5,12 @@ const getClient = () => {
   // @ts-ignore
   const apiKey = import.meta.env.VITE_API_KEY || process.env.API_KEY;
   
-  
   if (!apiKey) {
     console.error("API_KEY is missing. Please set VITE_API_KEY in your Vercel Environment Variables.");
+  } else {
+    // Debug: Log masked key to verify it's loaded correctly (masking most of it)
+    // This helps confirm if there are quotes or whitespace issues
+    console.log(`[Gemini] API Key loaded: ${apiKey.substring(0, 5)}...${apiKey.substring(apiKey.length - 3)}`);
   }
   return new GoogleGenAI({ apiKey: apiKey || '' });
 };
