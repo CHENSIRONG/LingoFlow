@@ -1,10 +1,12 @@
-
 import { GoogleGenAI, Type, Modality } from "@google/genai";
 
 const getClient = () => {
-  const apiKey = process.env.API_KEY;
+  // Check for VITE_API_KEY (Vercel/Vite standard) or fallback to API_KEY (Local/Node)
+  // We cast import.meta to any to avoid TS errors if tsconfig isn't set up for Vite types
+  const apiKey = (import.meta as any).env?.VITE_API_KEY || process.env.API_KEY;
+  
   if (!apiKey) {
-    console.error("API_KEY is missing in environment variables.");
+    console.error("API_KEY is missing. Please set VITE_API_KEY in your Vercel Environment Variables.");
   }
   return new GoogleGenAI({ apiKey: apiKey || '' });
 };
