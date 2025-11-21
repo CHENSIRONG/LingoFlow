@@ -5,6 +5,7 @@ const getClient = () => {
   // @ts-ignore
   const apiKey = import.meta.env.VITE_API_KEY || process.env.API_KEY;
   
+  
   if (!apiKey) {
     console.error("API_KEY is missing. Please set VITE_API_KEY in your Vercel Environment Variables.");
   }
